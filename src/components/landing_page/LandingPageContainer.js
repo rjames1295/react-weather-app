@@ -29,24 +29,29 @@ class LandingPageContainer extends React.Component {
         this._fetchData()
     }
 
-    _fetchData = () => {
-        _getUserGeolocation()
-            .then(geolocation => {
-                if (geolocation) {
-                    this.props.setCurrentUserGeolocation(geolocation)
-                    _weatherAPI.getCurrentWeatherByGeolocation(geolocation).then(response => {
-                        // console.log(response)
-                        this.setState({
-                            currentWeatherInfo: response.data
-                        })
-                    })
-                } else {
-                    _toast("error", "Error retrieving current location")
-                }
+    _fetchData = async () => {
+        let geolocation = await _getUserGeolocation().catch(err => {
+            /* 
+             * No need to show the error in the catch block, since axios interceptor
+             * is configured to show a toastr on error
+             */
+            console.error(err)
+        })
+
+        if (geolocation) {
+            // Save the geolocation in redux
+            this.props.setCurrentUserGeolocation(geolocation)
+
+            const weatherResponse = await _weatherAPI.getCurrentWeatherByGeolocation(geolocation).catch(err => {
+                console.error(err)
             })
-            .catch(err => {
-                _toast("error", err)
+            
+            this.setState({
+                currentWeatherInfo: weatherResponse.data
             })
+        } else {
+            _toast("error", "Error retrieving current location")
+        }
     }
 
     render = () => {
