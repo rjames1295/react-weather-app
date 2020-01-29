@@ -1,27 +1,25 @@
 import React from "react"
-// import logo from "../logo.svg"
-import LandingPageContainer from "../components/landing_page/LandingPageContainer"
-
+import { withRouter } from "react-router-dom"
+import Container from "../components/landing_page/Container"
+import { OWM_API_KEY_STR } from "../config/config"
 
 class LandingPage extends React.Component {
-    state = {}
-
     render = () => {
-        return (
-            <>
-                {/* <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                        Edit <code>src/App.js</code> and save to reload.
-                    </p>
-                    <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                        Learn React
-                    </a>
-                </header> */}
-                <LandingPageContainer />
-            </>
-        )
+        const apiKey = localStorage.getItem(OWM_API_KEY_STR)
+
+        if (apiKey) {
+            return <Container {...this.props} />
+        }
+        
+        return <></>
     }
 }
 
-export default LandingPage
+/**
+ * Exporting using withRouter() allows the component
+ * to receive router props
+ * @param {object} history
+ * @param {object} location
+ * @param {object} match
+ */
+export default withRouter(LandingPage)

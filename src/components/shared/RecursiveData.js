@@ -15,9 +15,9 @@ class ExpandableProperty extends React.Component {
             <>
                 <span
                     style={{
-                        cursor: 'pointer',
-                        textStyle: 'underline',
-                        color: 'blue'
+                        cursor: "pointer",
+                        textStyle: "underline",
+                        color: "blue"
                     }}
                     onClick={() => {
                         this.setState({ open: !this.state.open })

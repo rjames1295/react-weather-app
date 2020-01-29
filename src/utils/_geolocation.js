@@ -7,11 +7,10 @@ const _getUserGeolocation = () => {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     if (position.coords) {
-                        const currentUserPosition = {
+                        resolve({
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
-                        }
-                        resolve(currentUserPosition)
+                        })
                     }
                 },
                 err => {
@@ -46,8 +45,4 @@ const _getUserGeolocationFromZipCode = zipCode => {
     })
 }
 
-export {
-    _getUserGeolocation,
-    _getUserGeolocationFromCity,
-    _getUserGeolocationFromZipCode
-}
+export { _getUserGeolocation, _getUserGeolocationFromCity, _getUserGeolocationFromZipCode }

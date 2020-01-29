@@ -3,10 +3,8 @@
  * and show toastrs on error
  */
 
-
 import axios from "axios"
 import { _toast as toast } from "../utils/_toast"
-
 
 const _axios = axios.create({})
 
