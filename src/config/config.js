@@ -1,8 +1,7 @@
-const weatherMapAPIKey = '0d6abf43bc0129ed9be7251a7ba6c9df'
-const baseAPIURL = 'https://api.openweathermap.org/'
+const OWM_API_KEY_STR = "OWM_API_KEY"
+const DEFAULT_UNITS_STR = "DEFAULT_UNITS"
+const THEME_SETTING_STR = "THEME_SETTING_STR"
 
+const baseAPIURL = "https://api.openweathermap.org/"
 
-export {
-    weatherMapAPIKey,
-    baseAPIURL
-}
+export { OWM_API_KEY_STR, DEFAULT_UNITS_STR, baseAPIURL, THEME_SETTING_STR }

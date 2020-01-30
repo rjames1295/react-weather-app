@@ -2,63 +2,58 @@
  * General purpose component for recursively displaying JSON data where keys and values are dynamic
  */
 
-import React from "react"
+import React, { useState } from "react"
 import { camelCaseToNormalCase } from "../../utils/_helpers"
 
-class ExpandableProperty extends React.Component {
-    state = {
-        open: !!this.props.expanded
-    }
+const ExpandableProperty = props => {
+    const [isOpen, setIsOpen] = useState(!!props.expanded)
 
-    render() {
-        return (
-            <>
-                <span
-                    style={{
-                        cursor: 'pointer',
-                        textStyle: 'underline',
-                        color: 'blue'
-                    }}
-                    onClick={() => {
-                        this.setState({ open: !this.state.open })
-                    }}
-                >
-                    {this.props.title}
-                    {this.state.open ? <span> v</span> : <span> ></span>}
-                </span>
+    return (
+        <>
+            <span
+                style={{
+                    cursor: "pointer",
+                    textStyle: "underline",
+                    color: "blue"
+                }}
+                onClick={() => {
+                    setIsOpen(!isOpen)
+                }}
+            >
+                {props.title}
+                {isOpen ? <span> v</span> : <span> ></span>}
+            </span>
 
-                {this.state.open ? this.props.children : null}
-                {this.props.children.length === 0 && this.state.open ? <i>Empty</i> : null}
-            </>
-        )
-    }
+            {isOpen ? props.children : null}
+            {props.children.length === 0 && isOpen ? <i>Empty</i> : null}
+        </>
+    )
 }
 
-class RecursiveData extends React.Component {
-    render() {
-        return (
+const RecursiveData = props => {
+    return (
             <div className="text-left p-l-15">
-                {this.props.property !== null ? (
+                {props.property !== null ? (
                     <>
-                        {typeof this.props.property === "number" ||
-                        typeof this.props.property === "string" ||
-                        typeof this.props.property === "boolean" ? (
+                        {typeof props.property === "number" ||
+                        typeof props.property === "string" ||
+                        typeof props.property === "boolean" ? (
                             <>
                                 {" "}
-                                <b>{camelCaseToNormalCase(this.props.propertyName)}</b> : {String(this.props.property)}{" "}
+                                <b>{camelCaseToNormalCase(props.propertyName)}</b> : {String(props.property)}{" "}
                             </>
                         ) : (
                             <>
                                 <ExpandableProperty
-                                    title={camelCaseToNormalCase(this.props.propertyName)}
-                                    expanded={this.props.rootProperty}
+                                    title={camelCaseToNormalCase(props.propertyName)}
+                                    expanded={props.rootProperty}
                                 >
-                                    {Object.values(this.props.property).map((property, index, { length }) => {
+                                    {Object.values(props.property).map((property, index, { length }) => {
                                         return (
                                             <RecursiveData
                                                 key={index}
                                                 property={property}
-                                                propertyName={Object.getOwnPropertyNames(this.props.property)[index]}
+                                                propertyName={Object.getOwnPropertyNames(props.property)[index]}
                                                 excludeBottomBorder={index === length - 1}
                                             />
                                         )
@@ -70,12 +65,11 @@ class RecursiveData extends React.Component {
                 ) : (
                     <>
                         {" "}
-                        <b>{camelCaseToNormalCase(this.props.propertyName)}</b> : {String(this.props.property)}{" "}
+                        <b>{camelCaseToNormalCase(props.propertyName)}</b> : {String(props.property)}{" "}
                     </>
                 )}
             </div>
         )
-    }
 }
 
 export default RecursiveData

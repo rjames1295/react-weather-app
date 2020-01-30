@@ -1,3 +1,10 @@
+import moment from "moment"
+
+const truncateString = (str, num = 10) => {
+    if (str.length <= num) return str
+    return str.slice(0, num) + "..."
+}
+
 /**
  * Convert 'thisSentence' to 'This sentence'
  * @param {string} str camel cased string to convert in to normal case with spacing
@@ -21,14 +28,13 @@ const stringToCamelCase = str => {
 /**
  * Search recursively through a list of objects for objects that match keyword
  * @param {array} obj original array to search through
- * @param {any} key keyword to search for
+ * @param {string} key keyword to search for
  * @param {array} list new list to append results that match the keyword
  * @returns {array}
  */
 const objectFindRecursive = (obj, key, list) => {
-    //    key = stringToCamelCase(key);
     if (!obj) return []
-    if (obj instanceof Array) {
+    if (Array.isArray(obj)) {
         for (let i in obj) {
             list = list.concat(objectFindRecursive(obj[i], key, []))
         }
@@ -36,7 +42,7 @@ const objectFindRecursive = (obj, key, list) => {
     }
     if (obj[key]) list.push(obj[key])
 
-    if (typeof obj == "object" && obj !== null) {
+    if (typeof obj === "object" && obj !== null) {
         const children = Object.keys(obj)
         if (children.length > 0) {
             for (let i in children) {
@@ -47,4 +53,26 @@ const objectFindRecursive = (obj, key, list) => {
     return list
 }
 
-export { camelCaseToNormalCase, stringToCamelCase, objectFindRecursive }
+/**
+ * @param {array} list array of weather objects from openweathermap API
+ */
+const _groupWeatherByDay = list => {
+    if (!list || !list.length) return []
+
+    const days = new Map() // Use Map to mantain insertion order of dates
+
+    /**
+     * Loop through the objects in the list,
+     * Convert the dt into dddd Do MMMM format (Wednesday 29th January)
+     * For every different [day], push the weather info
+     */
+    for (const weather of list) {
+        const day = moment(weather.dt * 1000).format("dddd Do MMMM")
+        if (!days[day]) days[day] = []
+        days[day].push(weather)
+    }
+
+    return days
+}
+
+export { truncateString, camelCaseToNormalCase, stringToCamelCase, objectFindRecursive, _groupWeatherByDay }
