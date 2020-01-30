@@ -21,17 +21,14 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const LandingPageMain = props => {
-    const { setCurrentUserGeolocation } = props
+    const { setCurrentUserGeolocation, currentUserGeolocation } = props
     const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
         const _fetchData = async () => {
             let geolocation = await _getUserGeolocation().catch(err => {
-                /**
-                 * No need to show the toastr in the catch block, since axios interceptor
-                 * is configured to show a toastr on error
-                 */
                 console.error(err)
+                enqueueSnackbar(err.message, { variant: "error" })
             })
 
             geolocation
@@ -40,8 +37,10 @@ const LandingPageMain = props => {
                 : enqueueSnackbar("Error retrieving current location", { variant: "error" })
         }
 
-        _fetchData()
-    }, [setCurrentUserGeolocation, enqueueSnackbar])
+        if (!currentUserGeolocation.lat || !currentUserGeolocation.lng) {
+            _fetchData()
+        }
+    }, [setCurrentUserGeolocation, enqueueSnackbar, currentUserGeolocation])
 
     return (
         <>
