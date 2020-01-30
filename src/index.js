@@ -21,7 +21,7 @@ ReactDOM.render(
     <ThemeProvider theme={materialTheme}>
         <CssBaseline />
         <Provider store={store}>
-            <BrowserRouter>
+            <BrowserRouter basename={'/react-weather-app'}>
                 <SnackbarProvider maxSnack={5}>
                     {/* <NavBar /> */}
                     <NavBarMaterial />
