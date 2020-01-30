@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 const WeatherCard = props => {
     const classes = useStyles()
     // const bull = <span className={classes.bullet}>•</span>
-    const { weatherInfo = {}, _key } = props
+    const { weatherInfo = {}, _key, day } = props
 
     // console.log(weatherInfo)
 
@@ -74,7 +74,7 @@ const WeatherCard = props => {
                     {/* be{bull}nev{bull}o{bull}lent */}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    adjective
+                    {day}
                 </Typography>
                 {/* <Typography variant="body2" component="p"> */}
                 {/* well meaning and kindly.

@@ -1,4 +1,7 @@
 import React, { useEffect } from "react"
+
+import CircularProgress from "@material-ui/core/CircularProgress"
+
 import { useHttpGet } from "../../hooks/_http"
 import { _weatherAPI } from "../../api_service/weather"
 import { connect } from "react-redux"
@@ -29,11 +32,11 @@ const CurrentWeather = props => {
     }, [currentUserGeolocation, setUrl])
 
     if (currentWeatherErrMsg) {
-        return <>{String(currentWeatherErrMsg)}</>
+        return <div className="text-center">{String(currentWeatherErrMsg)}</div>
     }
 
     if (isWeatherInfoLoading) {
-        return <> Loading... </>
+        return <div className="text-center"><CircularProgress /></div>
     }
 
     if (currentWeatherInfo) {

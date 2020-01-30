@@ -1,13 +1,16 @@
 import React, { useEffect } from "react"
 import { connect } from "react-redux"
 
-import WeatherCard from "../shared/WeatherCard"
-// import ErrorCard from "../shared/ErrorCard"
+import CircularProgress from "@material-ui/core/CircularProgress"
+
 import { useHttpGet } from "../../hooks/_http"
 import { _weatherAPI } from "../../api_service/weather"
 import { _groupWeatherByDay } from "../../utils/_helpers"
 import RecursiveData from "../shared/RecursiveData"
 import { Grid, Typography } from "@material-ui/core"
+
+import WeatherCard from "../shared/WeatherCard"
+// import ErrorCard from "../shared/ErrorCard"
 
 const mapStateToProps = state => ({
     currentUserGeolocation: state.currentUserGeolocation
@@ -29,11 +32,11 @@ const ForecastedWeatherFiveDays = props => {
     }, [currentUserGeolocation, setUrl])
 
     if (errorMessage) {
-        return <>{String(errorMessage)}</>
+        return <div className="text-center">{String(errorMessage)}</div>
     }
 
     if (isLoading) {
-        return <> Loading... </>
+        return <div className="text-center"><CircularProgress /></div>
     }
 
     if (weatherResponse) {
@@ -43,12 +46,6 @@ const ForecastedWeatherFiveDays = props => {
              */
             const groupedWeatherData = _groupWeatherByDay(weatherResponse.list)
             const forecastWeatherCity = weatherResponse.city
-            // console.log(Object.keys(groupedWeatherData))
-            // setForecastWeatherCity(weatherResponse.city)
-
-            // for (let key of Object.keys(groupedWeatherData)) {
-            //     console.log(groupedWeatherData[key])
-            // }
 
             return (
                 <div className="text-center">
@@ -68,7 +65,7 @@ const ForecastedWeatherFiveDays = props => {
                                         {groupedWeatherData[key].map((weatherInfo, _index) => {
                                             const uniqKey = `w-card-${index}-${_index}`
                                             return (
-                                                <WeatherCard weatherInfo={weatherInfo} _key={uniqKey} key={uniqKey} />
+                                                <WeatherCard day={key} weatherInfo={weatherInfo} _key={uniqKey} key={uniqKey} />
                                             )
                                         })}
                                     </Grid>
