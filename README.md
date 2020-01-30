@@ -6,9 +6,6 @@
 
 ### Running the app locally
 * `cd /path/to/project`
-* Add your Open Weather Map API key as an environment variable
-  * `export OWMAPI_KEY="{your_api_key_here}"`
-  * To remove the api key `unset OWMAPI_KEY`
 * `yarn start`
 
 
