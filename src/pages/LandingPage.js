@@ -1,18 +1,20 @@
 import React from "react"
 import { withRouter } from "react-router-dom"
-import Container from "../components/landing_page/Container"
+import LandingPageMain from "../components/landing_page/LandingPageMain"
+import Container from "@material-ui/core/Container"
 import { OWM_API_KEY_STR } from "../config/config"
 
-class LandingPage extends React.Component {
-    render = () => {
-        const apiKey = localStorage.getItem(OWM_API_KEY_STR)
-
-        if (apiKey) {
-            return <Container {...this.props} />
-        }
-        
-        return <></>
+const LandingPage = props => {
+    const apiKey = localStorage.getItem(OWM_API_KEY_STR)
+    if (apiKey) {
+        return (
+            <Container>
+                <LandingPageMain {...props} />
+            </Container>
+        )
     }
+
+    return <></>
 }
 
 /**

@@ -1,44 +1,72 @@
-import React from "react"
+import React, { useState } from "react"
 import { connect } from "react-redux"
-import { Alert } from "reactstrap"
 import { OWM_API_KEY_STR } from "../../config/config"
 
+import Button from "@material-ui/core/Button"
+import Alert from "@material-ui/lab/Alert"
+import AddAPIKeyModal from "../modals/AddAPIKeyModal"
 
 const mapStateToProps = state => ({
-    warningList: state.warningList,
-    errorList: state.errorList
+    warningList: state.warningList || [],
+    errorList: state.errorList || []
 })
 
-class Alerts extends React.Component {
-    
-    render = () => {
-        const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
+const Alerts = props => {
+    const { warningList } = props
+    const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
 
-        return (
-            <div className="p-3">
-                {
-                    !apiKey && <Alert color="danger" className="mb-2">You will need to provide an API key before using this site!</Alert>
-                }
-                {this.props.warningList &&
-                    this.props.warningList.map(warning => {
+    const [isAddAPIKeyModalOpen, setIsAddAPIKeyModalOpen] = useState(false)
+
+    return (
+        <>
+            <AddAPIKeyModal
+                isOpen={isAddAPIKeyModalOpen}
+                _closeHandler={() => {
+                    setIsAddAPIKeyModalOpen(false)
+                }}
+                _toggleHandler={() => {
+                    setIsAddAPIKeyModalOpen(!isAddAPIKeyModalOpen)
+                }}
+            />
+            <div className="pl-5 pr-5 pb-3 pt-3">
+                {!apiKey && (
+                    <Alert variant="filled" severity="info" className="mb-2" action={
+                        <Button onClick={() => {
+                            setIsAddAPIKeyModalOpen(!isAddAPIKeyModalOpen)
+                        }}>
+                            Add API Key
+                        </Button>
+                    }>
+                        You will need to provide an API key before you can access weather info!
+
+                    </Alert>
+                )}
+                {warningList &&
+                    warningList.map((warning, index) => {
                         return (
-                            <>
-                                <Alert color="warning" className="mb-2">{String(warning)}</Alert>
-                            </>
+                            <Alert variant="filled" severity="warning" className="mb-2" key={index}>
+                                {String(warning)}
+                            </Alert>
                         )
                     })}
 
-                {this.props.errorList &&
-                    this.props.errorList.map(error => {
+                {props.errorList &&
+                    props.errorList.map((error, index) => {
                         return (
                             <>
-                                <Alert color="danger" className="mb-2">{String(error)}</Alert>
+                                <Alert variant="filled" severity="error" className="mb-2" key={index} action={
+                                    <Button>
+                                        Send an e-mail about this error
+                                    </Button>
+                                }>
+                                    {String(error)}
+                                </Alert>
                             </>
                         )
                     })}
             </div>
-        )
-    }
+        </>
+    )
 }
 
 export default connect(mapStateToProps, "")(Alerts)

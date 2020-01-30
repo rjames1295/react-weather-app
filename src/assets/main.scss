@@ -1,3 +1,7 @@
+@import './colors.scss';
+@import './helpers.scss';
+
+// Start HTML tags
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,14 +9,43 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    // background-image: url("./images/sunset-1.png");
+    // background-repeat: no-repeat;
+    // background-position: center center;
+    // background-size: 30%;
+    // background-attachment: fixed;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
-  
+
+a:-webkit-any-link {
+    color: #f89727;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+footer {
+
+}
+// End HTML tags
+ 
+// Start classes
+.nav-bar {
+    flex-grow: 1;
+}
+
+.nav-bar .title {
+    flex-grow: 1;
+}
+
+.nav-bar .menu-button {
+    margin-right: 16px;
+}
 
 .cursor-normal {
     cursor: default !important;
 }
+// End classes

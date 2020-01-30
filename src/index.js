@@ -5,26 +5,33 @@ import Router from "./router/router"
 import { Provider } from "react-redux"
 import store from "./store/Store"
 import * as serviceWorker from "./serviceWorker"
-import { ToastContainer } from "react-toastify"
-import NavBar from "./components/shared/NavBar"
+import { SnackbarProvider } from "notistack"
+// import NavBar from "./components/shared/NavBar"
+import NavBarMaterial from "./components/shared/NavBarMaterial"
 import Footer from "./components/shared/Footer"
-import Alerts from  "./components/shared/Alerts"
+import Alerts from "./components/shared/Alerts"
+import { ThemeProvider } from "@material-ui/core/styles"
+import materialTheme from "./assets/material-theme"
 
 // Start CSS imports
 import "./assets/main.scss"
-import "react-toastify/dist/ReactToastify.min.css"
-import "bootstrap/dist/css/bootstrap.min.css"
+import CssBaseline from "@material-ui/core/CssBaseline"
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ToastContainer />
-        <BrowserRouter>
-            <NavBar />
-            <Alerts />
-            <Router />
-            <Footer />
-        </BrowserRouter>
-    </Provider>,
+    <ThemeProvider theme={materialTheme}>
+        <CssBaseline />
+        <Provider store={store}>
+            <BrowserRouter>
+                <SnackbarProvider maxSnack={5}>
+                    {/* <NavBar /> */}
+                    <NavBarMaterial />
+                    <Alerts />
+                    <Router />
+                    <Footer />
+                </SnackbarProvider>
+            </BrowserRouter>
+        </Provider>
+    </ThemeProvider>,
     document.getElementById("root")
 )
 

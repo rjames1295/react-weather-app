@@ -37,7 +37,7 @@ const _warningsReducer = (state = [], action) => {
 const _errorsReducer = (state = [], action) => {
     switch (action.type) {
         case SC.ADD_TO_ERROR_LIST:
-            return [...state, ...action.payload]
+            return [...state, action.payload]
         case SC.UNSET_ERROR_LIST:
             return []
         default:

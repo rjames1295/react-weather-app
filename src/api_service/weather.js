@@ -10,8 +10,9 @@
  * @param {string} units optional param. enum [metric, imperial] defaults to Kelvin
  */
 
-import axios from "./_axios"
-import { OWMAPIKey, baseAPIURL } from "../config/config"
+import { OWM_API_KEY_STR, DEFAULT_UNITS_STR, baseAPIURL } from "../config/config"
+const OWMAPIKey = localStorage.getItem(OWM_API_KEY_STR) || ""
+const defaultUnit = localStorage.getItem(DEFAULT_UNITS_STR) || "metric"
 
 export const _weatherAPI = {
     /**
@@ -19,39 +20,29 @@ export const _weatherAPI = {
      * @param {string} countryCode
      */
     getCurrentWeatherByCityName: (cityName, countryCode) => {
-        if (!countryCode)
-            return axios.get(`${baseAPIURL}data/2.5/weather?q=${cityName}&units=metric&APPID=${OWMAPIKey}`)
+        if (!countryCode) return `${baseAPIURL}data/2.5/weather?q=${cityName}&units=${defaultUnit}&APPID=${OWMAPIKey}`
 
-        return axios.get(
-            `${baseAPIURL}data/2.5/weather?q=${cityName},${countryCode}&units=metric&APPID=${OWMAPIKey}`
-        )
+        return `${baseAPIURL}data/2.5/weather?q=${cityName},${countryCode}&units=${defaultUnit}&APPID=${OWMAPIKey}`
     },
     /**
      * @param {object} geolocation required fields {lat, lng}
      */
     getCurrentWeatherByGeolocation: (geolocation = {}) => {
-        return axios.get(
-            `${baseAPIURL}data/2.5/weather?lat=${geolocation.lat}&lon=${geolocation.lng}&units=metric&APPID=${OWMAPIKey}`
-        )
+        return `${baseAPIURL}data/2.5/weather?lat=${geolocation.lat}&lon=${geolocation.lng}&units=${defaultUnit}&APPID=${OWMAPIKey}`
     },
     /**
      * @param {string} cityName
      * @param {string} countryCode
      */
     getForecastedWeatherFiveDaysByCityName: (cityName, countryCode) => {
-        if (!countryCode)
-            return axios.get(`${baseAPIURL}data/2.5/forecast?q=${cityName}&units=metric&APPID=${OWMAPIKey}`)
+        if (!countryCode) return `${baseAPIURL}data/2.5/forecast?q=${cityName}&units=${defaultUnit}&APPID=${OWMAPIKey}`
 
-        return axios.get(
-            `${baseAPIURL}data/2.5/forecast?q=${cityName},${countryCode}&units=metric&APPID=${OWMAPIKey}`
-        )
+        return `${baseAPIURL}data/2.5/forecast?q=${cityName},${countryCode}&units=${defaultUnit}&APPID=${OWMAPIKey}`
     },
     /**
      * @param {object} geolocation required fields {lat, lng}
      */
     getForecastedWeatherFiveDaysByGeolocation: (geolocation = {}) => {
-        return axios.get(
-            `${baseAPIURL}data/2.5/forecast?lat=${geolocation.lat}&lon=${geolocation.lng}&units=metric&APPID=${OWMAPIKey}`
-        )
+        return `${baseAPIURL}data/2.5/forecast?lat=${geolocation.lat}&lon=${geolocation.lng}&units=${defaultUnit}&APPID=${OWMAPIKey}`
     }
 }

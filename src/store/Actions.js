@@ -21,4 +21,21 @@ const _actionUnsetCurrentUserGeolocation = () => {
     }
 }
 
-export { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation }
+/**
+ *
+ */
+const _actionAddToErrors = payload => {
+    return {
+        type: SC.ADD_TO_ERROR_LIST,
+        payload: payload
+    }
+}
+
+const _actionUnsetErrors = () => {
+    return {
+        type: SC.UNSET_ERROR_LIST,
+        payload: null
+    }
+}
+
+export { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation, _actionAddToErrors, _actionUnsetErrors }

@@ -1,60 +1,68 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useHttpGet } from "../../hooks/_http"
 import { _weatherAPI } from "../../api_service/weather"
 import { connect } from "react-redux"
-
-import RecursiveData from "../shared/RecursiveData"
-import { _toast } from "../../utils/_toast"
+// import RecursiveData from "../shared/RecursiveData"
+import WeatherCard from "../shared/WeatherCard"
+// import ErrorCard from "../shared/ErrorCard"
 
 const mapStateToProps = state => ({
     currentUserGeolocation: state.currentUserGeolocation
 })
 
-class CurrentWeather extends React.Component {
-    state = {
-        currentWeatherInfo: {}
-    }
+const CurrentWeather = props => {
+    const { currentUserGeolocation } = props
+    const [
+        { fetchedData: currentWeatherInfo, isLoading: isWeatherInfoLoading, errMessage: currentWeatherErrMsg },
+        setUrl
+    ] = useHttpGet()
 
-    componentDidUpdate = (prevProps) => {
-        // Fetch new data when geolocation changes
-        if (this.props.currentUserGeolocation !== prevProps.currentUserGeolocation) {
-            this._fetchData()
-        }
-    }
-
-    _fetchData = async () => {
-        const { currentUserGeolocation } = this.props
-        if (currentUserGeolocation &&
-            currentUserGeolocation.lat &&
-            currentUserGeolocation.lng) {
-            const weatherResponse = await _weatherAPI.getCurrentWeatherByGeolocation(currentUserGeolocation).catch(err => {
-                console.error(err)
-                return null
-            })
-
-            if (weatherResponse) {
-                this.setState({
-                    currentWeatherInfo: weatherResponse.data
-                })    
-            } else {
-                _toast("error", "Error loading current weather info")
+    useEffect(() => {
+        // Fetch data when geolocation changes
+        const _fetchWeatherInfo = () => {
+            if (currentUserGeolocation && currentUserGeolocation.lat && currentUserGeolocation.lng) {
+                setUrl(_weatherAPI.getCurrentWeatherByGeolocation(currentUserGeolocation))
             }
         }
+
+        _fetchWeatherInfo()
+    }, [currentUserGeolocation, setUrl])
+
+    if (currentWeatherErrMsg) {
+        return <>{String(currentWeatherErrMsg)}</>
     }
 
-    render = () => {
-        const { currentWeatherInfo } = this.state
+    if (isWeatherInfoLoading) {
+        return <> Loading... </>
+    }
+
+    if (currentWeatherInfo) {
         return (
-            <React.Fragment>
+            <div className="text-center">
                 Currently the weather info is
-                <RecursiveData
+                <WeatherCard weatherInfo={currentWeatherInfo} _key={"w-card"} />
+                {/* <RecursiveData
                     property={currentWeatherInfo}
                     propertyName="Weather info"
                     excludeBottomBorder={false}
                     rootProperty={true}
-                />
-            </React.Fragment>
+                /> */}
+            </div>
         )
     }
+
+    return (
+        <>
+            {/* <ErrorCard message={"Error loading current weather info"} /> */}
+        </>
+    )
 }
 
-export default connect(mapStateToProps, null)(CurrentWeather)
+export default connect(
+    mapStateToProps,
+    null
+)(
+    React.memo(CurrentWeather, (prevProps, nextProps) => {
+        return prevProps.currentUserGeolocation === nextProps.currentUserGeolocation
+    })
+)

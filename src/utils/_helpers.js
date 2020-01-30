@@ -1,9 +1,7 @@
 import moment from "moment"
 
 const truncateString = (str, num = 10) => {
-    if (str.length <= num) {
-        return str
-    }
+    if (str.length <= num) return str
     return str.slice(0, num) + "..."
 }
 
@@ -63,7 +61,7 @@ const _groupWeatherByDay = list => {
 
     const days = new Map() // Use Map to mantain insertion order of dates
 
-    /*
+    /**
      * Loop through the objects in the list,
      * Convert the dt into dddd Do MMMM format (Wednesday 29th January)
      * For every different [day], push the weather info

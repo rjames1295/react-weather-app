@@ -1,5 +1,7 @@
 const OWM_API_KEY_STR = "OWM_API_KEY"
-const OWMAPIKey = localStorage.getItem(OWM_API_KEY_STR) || ""
+const DEFAULT_UNITS_STR = "DEFAULT_UNITS"
+const THEME_SETTING_STR = "THEME_SETTING_STR"
+
 const baseAPIURL = "https://api.openweathermap.org/"
 
-export { OWM_API_KEY_STR, OWMAPIKey, baseAPIURL }
+export { OWM_API_KEY_STR, DEFAULT_UNITS_STR, baseAPIURL, THEME_SETTING_STR }

@@ -1,58 +1,53 @@
 import React from "react"
-import { connect } from "react-redux"
-import { Button, Modal, ModalHeader, ModalFooter, Row, Col } from "reactstrap"
+import Button from "@material-ui/core/Button"
+import Dialog from "@material-ui/core/Dialog"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import DialogActions from "@material-ui/core/DialogActions"
 
-class ConfirmModal extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            showModal: true
-        }
+const ConfirmModal = props => {
+    const { message, _closeHandler, _onDecide, isOpen } = props
+
+    const _handleAffirm = () => {
+        _onDecide(true)
+        _closeHandler()
     }
 
-    handleCancel = e => {
-        this.props.onDecide(false)
-        this.setState({
-            showModal: false
-        })
+    const _handleDeny = () => {
+        _onDecide(false)
+        _closeHandler()
     }
 
-    handleYes = e => {
-        this.props.onDecide(true)
-        this.setState({
-            showModal: false
-        })
-    }
-
-    render() {
-        const { text } = this.props
-        const { showModal } = this.state
-        return showModal ? (
+    if (isOpen) {
+        return (
             <>
-                <Modal isOpen={showModal} size="sm" toggle={this.handleCancel} className="confirm-modal">
-                    <ModalHeader>
-                        <span>{text}</span>
-                    </ModalHeader>
-                    <ModalFooter>
-                        <Row className="mt-4">
-                            <Col lg="6" md="6" sm="6">
-                                <Button className="default-btn-solid danger" onClick={this.handleCancel}>
-                                    Cancel
-                                </Button>
-                            </Col>
-                            <Col lg="6" md="6" sm="6">
-                                <Button className="default-btn-solid success" onClick={this.handleYes}>
-                                    Yes
-                                </Button>
-                            </Col>
-                        </Row>
-                    </ModalFooter>
-                </Modal>
+                <Dialog
+                    open={isOpen}
+                    onClose={_closeHandler}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Openweathermap API key"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            <span>{message}</span>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button className="default-btn-solid danger" onClick={_handleDeny}>
+                            Cancel
+                        </Button>
+                        <Button className="default-btn-solid success" onClick={_handleAffirm}>
+                            Yes
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </>
-        ) : (
-            <></>
         )
     }
+
+    return <></>
 }
 
-export default connect("", "")(ConfirmModal)
+export default ConfirmModal
