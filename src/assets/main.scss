@@ -48,4 +48,12 @@ footer {
 .cursor-normal {
     cursor: default !important;
 }
+
+.bg-sad-face {
+    background-image: url("./images/lmao.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 40%;
+    background-attachment: fixed;
+}
 // End classes

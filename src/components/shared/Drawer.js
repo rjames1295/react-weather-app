@@ -26,7 +26,7 @@ import { truncateString } from "../../utils/_helpers"
 
 const useStyles = makeStyles({
     list: {
-        width: 250
+        width: 350
     },
     fullList: {
         width: "auto"
@@ -35,7 +35,11 @@ const useStyles = makeStyles({
 
 const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
 
-const Drawer = () => {
+const ListItemLink = props => {
+    return <ListItem button component={Link} {...props} />
+}
+
+const Drawer = props => {
     const classes = useStyles()
     const [isAddAPIKeyModalOpen, setIsAddAPIKeyModalOpen] = useState(false)
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
@@ -64,7 +68,7 @@ const Drawer = () => {
                     <ListItemIcon>
                         <VpnKey />
                     </ListItemIcon>
-                    <ListItemText color="red">API key: {truncateString(apiKey, 5)}</ListItemText>
+                    <ListItemText color="red">API key: {truncateString(apiKey, 15)}</ListItemText>
                 </ListItem>
             )
         }
@@ -92,14 +96,14 @@ const Drawer = () => {
             onKeyDown={_toggleDrawer(false)}
         >
             <List>
-                <ListItem button>
+                <ListItemLink to="/about">
                     <ListItemIcon>
                         <Help />
                     </ListItemIcon>
                     <ListItemText>
-                        <Link to="/about">About</Link>
+                        About
                     </ListItemText>
-                </ListItem>
+                </ListItemLink>
                 {_renderAPIKeyDrawerItem()}
             </List>
             <Divider />
@@ -142,7 +146,7 @@ const Drawer = () => {
                 isOpen={isConfirmModalOpen}
             />
             <MenuIcon onClick={_toggleDrawer(true)} />
-            <SwipeableDrawer open={isDrawerOpen} onClose={_toggleDrawer(false)} onOpen={_toggleDrawer(true)}>
+            <SwipeableDrawer anchor="left" open={isDrawerOpen} onClose={_toggleDrawer(false)} onOpen={_toggleDrawer(true)}>
                 {_renderDrawerItems()}
             </SwipeableDrawer>
         </>
