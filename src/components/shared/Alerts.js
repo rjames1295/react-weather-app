@@ -5,6 +5,7 @@ import { OWM_API_KEY_STR } from "../../config/config"
 import Button from "@material-ui/core/Button"
 import Alert from "@material-ui/lab/Alert"
 import AddAPIKeyModal from "../modals/AddAPIKeyModal"
+import { withRouter } from "react-router"
 
 const mapStateToProps = state => ({
     warningList: state.warningList || [],
@@ -12,7 +13,7 @@ const mapStateToProps = state => ({
 })
 
 const Alerts = props => {
-    const { warningList } = props
+    const { warningList, location } = props
     const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
 
     const [isAddAPIKeyModalOpen, setIsAddAPIKeyModalOpen] = useState(false)
@@ -29,7 +30,9 @@ const Alerts = props => {
                 }}
             />
             <div className="pl-5 pr-5 pb-3 pt-3">
-                {!apiKey && (
+                {
+                    // Only show API key alert when on main page/landing page
+                location.pathname === '/' && !apiKey && (
                     <Alert variant="filled" severity="info" className="mb-2" action={
                         <Button onClick={() => {
                             setIsAddAPIKeyModalOpen(!isAddAPIKeyModalOpen)
@@ -69,4 +72,4 @@ const Alerts = props => {
     )
 }
 
-export default connect(mapStateToProps, "")(Alerts)
+export default connect(mapStateToProps, "")(withRouter(Alerts))

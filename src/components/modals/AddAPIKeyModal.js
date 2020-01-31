@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import Button from "@material-ui/core/Button"
-import TextField from '@material-ui/core/TextField'
+import TextField from "@material-ui/core/TextField"
 import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
+import IconButton from "@material-ui/core/IconButton"
+
+// import CloseIcon from "@material-ui/icons/Close"
 
 import { OWM_API_KEY_STR } from "../../config/config"
 import { useSnackbar } from "notistack"
@@ -42,7 +45,12 @@ const AddAPIKeyModal = props => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Openweathermap API key"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">
+                    {"OpenWeatherMap API key"}
+                    {/* <IconButton aria-label="close" className={""} onClick={_closeHandler}>
+                        <CloseIcon />
+                    </IconButton> */}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         <span>

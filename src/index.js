@@ -24,10 +24,12 @@ ReactDOM.render(
             <BrowserRouter basename={'/react-weather-app'}>
                 <SnackbarProvider maxSnack={5}>
                     {/* <NavBar /> */}
-                    <NavBarMaterial />
-                    <Alerts />
-                    <Router />
-                    <Footer />
+                    <div id="main-container">
+                        <NavBarMaterial />
+                        <Alerts />
+                        <Router />
+                        <Footer />
+                    </div>
                 </SnackbarProvider>
             </BrowserRouter>
         </Provider>
