@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 
 import CircularProgress from "@material-ui/core/CircularProgress"
 
-import { useHttpGet } from "../../hooks/_http"
+import { useHttpGet } from "../../hooks/_useHttpGet"
 import { _weatherAPI } from "../../api_service/weather"
 import { connect } from "react-redux"
 // import RecursiveData from "../shared/RecursiveData"

@@ -1,5 +1,4 @@
 import React from "react"
-import { withRouter } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 
 const AboutPage = props => {
@@ -38,4 +37,4 @@ const AboutPage = props => {
     )
 }
 
-export default withRouter(AboutPage)
+export default AboutPage

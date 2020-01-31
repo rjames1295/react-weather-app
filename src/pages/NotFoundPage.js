@@ -1,14 +1,9 @@
 import React, { useEffect } from "react"
-import { withRouter } from "react-router-dom"
 import Container from "@material-ui/core/Container"
+import { useLocation } from "react-router"
 
 const NotFound = props => {
-    // console.log(props)
-    const {
-        // history,
-        location
-        // match
-    } = props
+    const location = useLocation()
 
     useEffect(() => {
         document.body.classList.add("bg-sad-face")
@@ -24,4 +19,4 @@ const NotFound = props => {
     )
 }
 
-export default withRouter(NotFound)
+export default NotFound

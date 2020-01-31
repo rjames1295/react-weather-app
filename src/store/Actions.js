@@ -17,7 +17,7 @@ const _actionSetCurrentUserGeolocation = payload => {
 const _actionUnsetCurrentUserGeolocation = () => {
     return {
         type: SC.UNSET_CURRENT_USER_GEOLOCATION,
-        payload: null
+        payload: {}
     }
 }
 
@@ -34,7 +34,7 @@ const _actionAddToErrors = payload => {
 const _actionUnsetErrors = () => {
     return {
         type: SC.UNSET_ERROR_LIST,
-        payload: null
+        payload: []
     }
 }
 
