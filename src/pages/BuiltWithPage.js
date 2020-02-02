@@ -19,8 +19,8 @@ import CodeIcon from "@material-ui/icons/Code"
 import CloudIcon from "@material-ui/icons/Cloud"
 import StorageIcon from "@material-ui/icons/Storage"
 import CallMadeIcon from "@material-ui/icons/CallMade"
-import WorkIcon from "@material-ui/icons/Work"
-import BeachAccessIcon from "@material-ui/icons/BeachAccess"
+// import WorkIcon from "@material-ui/icons/Work"
+// import BeachAccessIcon from "@material-ui/icons/BeachAccess"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 const useStyles = makeStyles(theme => ({

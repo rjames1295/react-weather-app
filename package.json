@@ -47,7 +47,12 @@
   },
   "devDependencies": {
     "gh-pages": "^2.2.0",
-    "redux-logger": "^3.0.6"
+    "react-test-renderer": "^16.12.0",
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4"
   },
-  "homepage": "https://rjames1295.github.io/react-weather-app"
+  "homepage": "https://rjames1295.github.io/react-weather-app",
+  "jest": {
+    "clearMocks": true
+  }
 }

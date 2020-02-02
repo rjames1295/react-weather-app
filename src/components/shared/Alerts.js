@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 })
 
 const Alerts = props => {
-    const { warningList } = props
+    const { warningList, errorList } = props
     const location = useLocation()
     const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
 
@@ -57,8 +57,8 @@ const Alerts = props => {
                         )
                     })}
 
-                {props.errorList &&
-                    props.errorList.map((error, index) => {
+                {errorList &&
+                    errorList.map((error, index) => {
                         const uniqKey = `alert-error-${index}`
                         return (
                             <Alert variant="filled" severity="error" className="mb-2" key={uniqKey} action={

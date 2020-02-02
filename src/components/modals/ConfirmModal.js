@@ -5,8 +5,26 @@ import DialogTitle from "@material-ui/core/DialogTitle"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogActions from "@material-ui/core/DialogActions"
+import IconButton from "@material-ui/core/IconButton"
+
+import CloseIcon from "@material-ui/icons/Close"
+
+import { makeStyles } from "@material-ui/core"
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(2)
+    },
+    closeButton: {
+        position: "absolute",
+        right: theme.spacing(1),
+        top: theme.spacing(1)
+    }
+}))
 
 const ConfirmModal = props => {
+    const classes = useStyles()
     const { message, _closeHandler, _onDecide, isOpen } = props
 
     const _handleAffirm = () => {
@@ -28,7 +46,12 @@ const ConfirmModal = props => {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Openweathermap API key"}</DialogTitle>
+                    <DialogTitle className={classes.root} id="alert-dialog-title">
+                        {"Openweathermap API key"}
+                        <IconButton aria-label="close" className={classes.closeButton} onClick={_closeHandler}>
+                        <CloseIcon />
+                    </IconButton>
+                        </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             <span>{message}</span>

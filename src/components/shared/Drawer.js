@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
 import { makeStyles } from "@material-ui/core/styles"
@@ -74,10 +73,10 @@ const Drawer = props => {
                     </ListItemIcon>
                     <ListItemText color="red">API key: {truncateString(apiKey, 15)}</ListItemText>
                     <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete" onClick={_toggleConfirmModal}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete" onClick={_toggleConfirmModal}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
                 </ListItem>
             )
         }
@@ -109,23 +108,17 @@ const Drawer = props => {
                     <ListItemIcon>
                         <Help />
                     </ListItemIcon>
-                    <ListItemText>
-                        About
-                    </ListItemText>
+                    <ListItemText>About</ListItemText>
                 </ListItemLink>
                 <ListItemLink to={routes.builtWith}>
                     <ListItemIcon>
                         <Build />
                     </ListItemIcon>
-                    <ListItemText>
-                        Built using
-                    </ListItemText>
+                    <ListItemText>Built using</ListItemText>
                 </ListItemLink>
             </List>
             <Divider />
-            <List>
-                {_renderAPIKeyDrawerItem()}
-            </List>
+            <List>{_renderAPIKeyDrawerItem()}</List>
         </div>
     )
 
@@ -153,11 +146,16 @@ const Drawer = props => {
                 isOpen={isConfirmModalOpen}
             />
             <MenuIcon onClick={_toggleDrawer(true)} />
-            <SwipeableDrawer anchor="left" open={isDrawerOpen} onClose={_toggleDrawer(false)} onOpen={_toggleDrawer(true)}>
+            <SwipeableDrawer
+                anchor="left"
+                open={isDrawerOpen}
+                onClose={_toggleDrawer(false)}
+                onOpen={_toggleDrawer(true)}
+            >
                 {_renderDrawerItems()}
             </SwipeableDrawer>
         </>
     )
 }
 
-export default connect("", "")(Drawer)
+export default Drawer

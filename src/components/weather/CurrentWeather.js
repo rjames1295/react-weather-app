@@ -1,12 +1,19 @@
 import React, { useEffect } from "react"
 
 import CircularProgress from "@material-ui/core/CircularProgress"
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import Button from "@material-ui/core/Button"
+import Typography from "@material-ui/core/Typography"
+import Grid from "@material-ui/core/Grid"
 
 import { useHttpGet } from "../../hooks/_useHttpGet"
 import { _weatherAPI } from "../../api_service/weather"
 import { connect } from "react-redux"
-// import RecursiveData from "../shared/RecursiveData"
-import WeatherCard from "../shared/WeatherCard"
+import RecursiveData from "../shared/RecursiveData"
+// import WeatherCard from "../shared/WeatherCard"
+
 // import ErrorCard from "../shared/ErrorCard"
 
 const mapStateToProps = state => ({
@@ -36,29 +43,50 @@ const CurrentWeather = props => {
     }
 
     if (isWeatherInfoLoading) {
-        return <div className="text-center"><CircularProgress /></div>
+        return (
+            <div className="text-center">
+                <CircularProgress />
+            </div>
+        )
     }
 
     if (currentWeatherInfo) {
         return (
             <div className="text-center">
-                Currently the weather info is
-                <WeatherCard weatherInfo={currentWeatherInfo} _key={"w-card"} />
-                {/* <RecursiveData
+                <Grid container>
+                    <Grid item lg={2}></Grid>
+                    <Grid item lg={8}>
+                        Currently the weather info is
+                        <Card className={"classes.card mb-3"} key={"_key"}>
+                            <CardContent>
+                                <Typography className={"classes.title"} color="textSecondary" gutterBottom id="current-weather-location-name">
+                                    {currentWeatherInfo.name}
+                                </Typography>
+                                <Typography variant="h5" component="h2">
+                                    {currentWeatherInfo.name}
+                                </Typography>
+                                <Typography className={"classes.pos"} color="textSecondary" id="current-weather-info-day">
+                                    {currentWeatherInfo.day}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Learn More</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item lg={2}></Grid>
+                </Grid>
+                <RecursiveData
                     property={currentWeatherInfo}
                     propertyName="Weather info"
                     excludeBottomBorder={false}
                     rootProperty={true}
-                /> */}
+                />
             </div>
         )
     }
 
-    return (
-        <>
-            {/* <ErrorCard message={"Error loading current weather info"} /> */}
-        </>
-    )
+    return <>{/* <ErrorCard message={"Error loading current weather info"} /> */}</>
 }
 
 export default connect(

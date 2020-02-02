@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton"
 import Tooltip from "@material-ui/core/Tooltip"
 
 import Brightness6 from "@material-ui/icons/Brightness6"
-import GitHub from "@material-ui/icons/GitHub"
+// import GitHub from "@material-ui/icons/GitHub"
 
 import { Link as RouterLink } from "react-router-dom"
 import Drawer from "./Drawer"

@@ -8,12 +8,26 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import IconButton from "@material-ui/core/IconButton"
 
-// import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@material-ui/icons/Close"
 
 import { OWM_API_KEY_STR } from "../../config/config"
 import { useSnackbar } from "notistack"
+import { makeStyles } from "@material-ui/core"
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(2)
+    },
+    closeButton: {
+        position: "absolute",
+        right: theme.spacing(1),
+        top: theme.spacing(1)
+    }
+}))
 
 const AddAPIKeyModal = props => {
+    const classes = useStyles()
     const {
         _closeHandler,
         // _toggleHandler,
@@ -45,11 +59,11 @@ const AddAPIKeyModal = props => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle className={classes.root} id="alert-dialog-title">
                     {"OpenWeatherMap API key"}
-                    {/* <IconButton aria-label="close" className={""} onClick={_closeHandler}>
+                    <IconButton aria-label="close" className={classes.closeButton} onClick={_closeHandler}>
                         <CloseIcon />
-                    </IconButton> */}
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">

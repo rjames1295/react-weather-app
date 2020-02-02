@@ -66,14 +66,14 @@ const WeatherCard = props => {
     return (
         <Card className={classes.card + " mb-3"} key={_key}>
             <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography className={classes.title} color="textSecondary" gutterBottom id="weather-card-title">
                     {weatherInfo.name}
                 </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" id="weather-card-sub-title">
                     {weatherInfo.name}
                     {/* be{bull}nev{bull}o{bull}lent */}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
+                <Typography className={classes.pos} color="textSecondary" id="weather-card-day">
                     {day}
                 </Typography>
                 {/* <Typography variant="body2" component="p"> */}

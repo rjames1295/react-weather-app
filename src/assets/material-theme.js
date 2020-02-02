@@ -1,6 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles"
 import orange from "@material-ui/core/colors/orange"
-import purple from "@material-ui/core/colors/purple"
+// import purple from "@material-ui/core/colors/purple"
 import green from "@material-ui/core/colors/green"
 
 import { THEME_SETTING_STR } from "../config/config"
