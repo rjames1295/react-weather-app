@@ -1,16 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
-import Router from "./router/router"
+import { ThemeProvider } from "@material-ui/core/styles"
+import { SnackbarProvider } from "notistack"
+
 import { Provider } from "react-redux"
 import store from "./store/Store"
 import * as serviceWorker from "./serviceWorker"
-import { SnackbarProvider } from "notistack"
-// import NavBar from "./components/shared/NavBar"
-import NavBarMaterial from "./components/shared/NavBarMaterial"
-import Footer from "./components/shared/Footer"
-import Alerts from "./components/shared/Alerts"
-import { ThemeProvider } from "@material-ui/core/styles"
+
+import App from "./App"
+
 import materialTheme from "./assets/material-theme"
 
 // Start CSS imports
@@ -23,11 +22,7 @@ ReactDOM.render(
         <Provider store={store}>
             <BrowserRouter basename={'/react-weather-app'}>
                 <SnackbarProvider maxSnack={5}>
-                    {/* <NavBar /> */}
-                    <NavBarMaterial />
-                    <Alerts />
-                    <Router />
-                    <Footer />
+                    <App />
                 </SnackbarProvider>
             </BrowserRouter>
         </Provider>

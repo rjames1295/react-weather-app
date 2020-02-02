@@ -27,10 +27,18 @@ a {
     text-decoration: none;
 }
 
-footer {
-
-}
 // End HTML tags
+
+// Start IDs
+#main-container {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
+}
+
+// End IDs
  
 // Start classes
 .nav-bar {

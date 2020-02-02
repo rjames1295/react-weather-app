@@ -4,6 +4,7 @@ import { _getUserGeolocation } from "../../utils/_geolocation"
 import { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation } from "../../store/Actions"
 import { connect } from "react-redux"
 
+
 import CurrentWeather from "../weather/CurrentWeather"
 import ForecastedWeatherFiveDays from "../weather/ForecastedWeatherFiveDays"
 
@@ -20,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-const LandingPageMain = props => {
+const WeatherContainer = props => {
     const { setCurrentUserGeolocation, currentUserGeolocation } = props
     const { enqueueSnackbar } = useSnackbar()
 
@@ -50,4 +51,4 @@ const LandingPageMain = props => {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPageMain)
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherContainer)

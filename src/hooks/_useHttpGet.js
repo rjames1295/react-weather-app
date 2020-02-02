@@ -19,13 +19,11 @@ export const useHttpGet = () => {
                 setResponseCode(err.status)
                 setIsLoading(false)
             })
+
             if (response) {
                 console.log(response)
                 setFetchedData(response.data)
                 setResponseCode(response.status)
-                setIsLoading(false)
-            } else {
-                setErrorMessage("No response received")
                 setIsLoading(false)
             }
         }

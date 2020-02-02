@@ -2,11 +2,11 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import orange from "@material-ui/core/colors/orange"
 // import purple from "@material-ui/core/colors/purple"
 import green from "@material-ui/core/colors/green"
-// import dark from "@material-ui/core/colors"
 
 import { THEME_SETTING_STR } from "../config/config"
 const themeSetting = localStorage.getItem(THEME_SETTING_STR) || ""
 const isLightTheme = themeSetting === "light" ? true : false
+
 
 const darkTheme = {
     palette: {
@@ -23,8 +23,13 @@ const darkTheme = {
     }
 }
 
-const lightTheme = {}
+const lightTheme = {
+    palette: {
+        type: "light"
+    }
+}
 
+// Dark theme by default
 const materialTheme = isLightTheme ? createMuiTheme(lightTheme) : createMuiTheme(darkTheme)
 
 export default materialTheme

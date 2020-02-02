@@ -1,10 +1,13 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
-import { OWM_API_KEY_STR } from "../../config/config"
+
+import { useLocation } from "react-router-dom"
 
 import Button from "@material-ui/core/Button"
 import Alert from "@material-ui/lab/Alert"
 import AddAPIKeyModal from "../modals/AddAPIKeyModal"
+
+import { OWM_API_KEY_STR } from "../../config/config"
 
 const mapStateToProps = state => ({
     warningList: state.warningList || [],
@@ -12,7 +15,8 @@ const mapStateToProps = state => ({
 })
 
 const Alerts = props => {
-    const { warningList } = props
+    const { warningList, errorList } = props
+    const location = useLocation()
     const apiKey = localStorage.getItem(OWM_API_KEY_STR) || ""
 
     const [isAddAPIKeyModalOpen, setIsAddAPIKeyModalOpen] = useState(false)
@@ -29,7 +33,9 @@ const Alerts = props => {
                 }}
             />
             <div className="pl-5 pr-5 pb-3 pt-3">
-                {!apiKey && (
+                {
+                    // Only show API key alert when on main page/landing page
+                location.pathname === '/' && !apiKey && (
                     <Alert variant="filled" severity="info" className="mb-2" action={
                         <Button onClick={() => {
                             setIsAddAPIKeyModalOpen(!isAddAPIKeyModalOpen)
@@ -43,25 +49,25 @@ const Alerts = props => {
                 )}
                 {warningList &&
                     warningList.map((warning, index) => {
+                        const uniqKey = `alert-warning-${index}`
                         return (
-                            <Alert variant="filled" severity="warning" className="mb-2" key={index}>
+                            <Alert variant="filled" severity="warning" className="mb-2" key={uniqKey}>
                                 {String(warning)}
                             </Alert>
                         )
                     })}
 
-                {props.errorList &&
-                    props.errorList.map((error, index) => {
+                {errorList &&
+                    errorList.map((error, index) => {
+                        const uniqKey = `alert-error-${index}`
                         return (
-                            <>
-                                <Alert variant="filled" severity="error" className="mb-2" key={index} action={
-                                    <Button>
-                                        Send an e-mail about this error
-                                    </Button>
-                                }>
-                                    {String(error)}
-                                </Alert>
-                            </>
+                            <Alert variant="filled" severity="error" className="mb-2" key={uniqKey} action={
+                                <Button>
+                                    Send an e-mail about this error
+                                </Button>
+                            }>
+                                {String(error)}
+                            </Alert>
                         )
                     })}
             </div>
