@@ -1,10 +1,13 @@
 import React, { useEffect } from "react"
 import { useSnackbar } from "notistack"
-import { _getUserGeolocation } from "../../utils/_geolocation"
-import { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation } from "../../store/Actions"
 import { connect } from "react-redux"
 
+import { _getUserGeolocation } from "../../utils/_geolocation"
+import { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation } from "../../store/Actions"
 
+import Grid from "@material-ui/core/Grid"
+
+import GoogleMapsPlacesSearch from "../google_maps/GoogleMapsPlacesSearch"
 import CurrentWeather from "../weather/CurrentWeather"
 import ForecastedWeatherFiveDays from "../weather/ForecastedWeatherFiveDays"
 
@@ -45,7 +48,16 @@ const WeatherContainer = props => {
 
     return (
         <>
+            <Grid container>
+                <Grid item lg={3}></Grid>
+                <Grid item lg={6}>
+                    <GoogleMapsPlacesSearch />
+                </Grid>
+                <Grid item lg={3}></Grid>
+            </Grid>
+            <hr />
             <CurrentWeather />
+            <hr />
             <ForecastedWeatherFiveDays />
         </>
     )

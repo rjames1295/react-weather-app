@@ -139,13 +139,15 @@ const Drawer = props => {
                 _toggleHandler={_toggleConfirmModal}
                 _onDecide={isConfirmed => {
                     if (isConfirmed) {
-                        localStorage.setItem(OWM_API_KEY_STR, "")
+                        localStorage.removeItem(OWM_API_KEY_STR)
                         window.location.reload()
                     }
                 }}
                 isOpen={isConfirmModalOpen}
             />
-            <MenuIcon onClick={_toggleDrawer(true)} />
+            <IconButton color="inherit" className={"menu-button"} onClick={_toggleDrawer(true)} aria-label={"menu"}>
+                <MenuIcon />
+            </IconButton>
             <SwipeableDrawer
                 anchor="left"
                 open={isDrawerOpen}

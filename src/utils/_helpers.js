@@ -55,6 +55,7 @@ const objectFindRecursive = (obj, key, list) => {
 
 /**
  * @param {array} list array of weather objects from openweathermap API
+ * @returns {array}
  */
 const _groupWeatherByDay = list => {
     if (!list || !list.length) return []
@@ -75,4 +76,45 @@ const _groupWeatherByDay = list => {
     return days
 }
 
-export { truncateString, camelCaseToNormalCase, stringToCamelCase, objectFindRecursive, _groupWeatherByDay }
+/**
+ *
+ * @param {object} data weather info object
+ */
+const mapDataToWeatherInterface = data => {
+    const mapped = {
+        city: data.name,
+        country: data.sys.country,
+        date: data.dt * 1000,
+        humidity: data.main.humidity,
+        icon_id: data.weather[0].id,
+        temperature: data.main.temp,
+        description: data.weather[0].description,
+        wind_speed: data.wind.speed * 3.6,
+        //   wind_speed: Math.round(data.wind.speed * 3.6), // convert from m/s to km/h
+        condition: data.cod
+    }
+
+    // Add extra properties for the five day forecast: dt_txt, icon, min, max
+    if (data.dt_txt) mapped.dt_txt = data.dt_txt
+
+    if (data.weather[0].icon) mapped.icon = data.weather[0].icon
+
+    if (data.main.temp_min && data.main.temp_max) {
+        mapped.max = data.main.temp_max
+        mapped.min = data.main.temp_min
+    }
+
+    // remove undefined fields
+    Object.keys(mapped).forEach(key => mapped[key] === undefined && delete data[key])
+
+    return mapped
+}
+
+export {
+    truncateString,
+    camelCaseToNormalCase,
+    stringToCamelCase,
+    objectFindRecursive,
+    _groupWeatherByDay,
+    mapDataToWeatherInterface
+}

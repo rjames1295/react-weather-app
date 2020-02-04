@@ -8,8 +8,19 @@ import { StoreConstants as SC } from "./StoreConstants"
 const _geolocationReducer = (state = {}, action) => {
     switch (action.type) {
         case SC.SET_CURRENT_USER_GEOLOCATION:
-            return { ...state, ...action.payload }
+            return { ...action.payload }
         case SC.UNSET_CURRENT_USER_GEOLOCATION:
+            return {}
+        default:
+            return state
+    }
+}
+
+const _selectedLocationReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SC.SET_SELECTED_LOCATION:
+            return { ...action.payload }
+        case SC.UNSET_SELECTED_LOCATION:
             return {}
         default:
             return state
@@ -47,6 +58,7 @@ const _errorsReducer = (state = [], action) => {
 
 export default combineReducers({
     currentUserGeolocation: _geolocationReducer,
+    selectedLocation: _selectedLocationReducer,
     warningList: _warningsReducer,
     errorList: _errorsReducer
 })

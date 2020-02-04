@@ -5,7 +5,7 @@ import Footer from "./components/shared/Footer"
 import Alerts from "./components/shared/Alerts"
 import Router from "./router/router"
 
-import { usePrevious } from "./hooks/_usePrevious"
+import { usePrevious } from "./hooks/_use-previous"
 
 import store from "./store/Store"
 import { _actionUnsetErrors } from "./store/Actions"

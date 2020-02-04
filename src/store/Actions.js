@@ -2,7 +2,6 @@ import { StoreConstants as SC } from "./StoreConstants"
 
 /**
  * @param {object} payload required fields {lat, lng}
- * @returns {object} fields {type, payload}
  */
 const _actionSetCurrentUserGeolocation = payload => {
     return {
@@ -12,7 +11,7 @@ const _actionSetCurrentUserGeolocation = payload => {
 }
 
 /**
- * @returns {object} fields {type}
+ * @returns {object} empty
  */
 const _actionUnsetCurrentUserGeolocation = () => {
     return {
@@ -22,7 +21,24 @@ const _actionUnsetCurrentUserGeolocation = () => {
 }
 
 /**
- *
+ * @param {string} payload location string i.e. Manama, Bahrain
+ */
+const _actionSetSelectedLocation = payload => {
+    return {
+        type: SC.SET_SELECTED_LOCATION,
+        payload: payload
+    }
+}
+
+const _actionUnsetSelectedLocation = () => {
+    return {
+        type: SC.UNSET_SELECTED_LOCATION,
+        payload: ""
+    }
+}
+
+/**
+ * @param {array} payload error array of strings
  */
 const _actionAddToErrors = payload => {
     return {
@@ -31,6 +47,9 @@ const _actionAddToErrors = payload => {
     }
 }
 
+/**
+ * @returns {array} empty
+ */
 const _actionUnsetErrors = () => {
     return {
         type: SC.UNSET_ERROR_LIST,
@@ -38,4 +57,11 @@ const _actionUnsetErrors = () => {
     }
 }
 
-export { _actionSetCurrentUserGeolocation, _actionUnsetCurrentUserGeolocation, _actionAddToErrors, _actionUnsetErrors }
+export {
+    _actionSetCurrentUserGeolocation,
+    _actionUnsetCurrentUserGeolocation,
+    _actionSetSelectedLocation,
+    _actionUnsetSelectedLocation,
+    _actionAddToErrors,
+    _actionUnsetErrors
+}

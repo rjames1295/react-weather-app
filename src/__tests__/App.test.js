@@ -7,7 +7,7 @@ import { SnackbarProvider } from "notistack"
 import { Provider } from "react-redux"
 
 import App from "../App"
-import { currentUserGeolocation } from "../__mocks__/current_user_geolocation"
+import { currentUserGeolocation } from "../__mocks__/current-user-geolocation"
 
 const mockStore = createMockStore([])
 

@@ -26,6 +26,7 @@ Weather API provided by [Open weather map](https://openweathermap.org/)
 
 * Google Maps API
 * Places auto-complete
+* https://create-react-app.dev/docs/running-tests/
 
 
 ## Useful references

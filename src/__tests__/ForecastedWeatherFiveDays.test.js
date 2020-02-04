@@ -4,8 +4,8 @@ import { act } from "react-dom/test-utils"
 import createMockStore from "redux-mock-store"
 
 import CurrentWeather from "../components/weather/CurrentWeather"
-import { fakeCurrentWeatherData } from "../__mocks__/current_weather"
-import { currentUserGeolocation } from "../__mocks__/current_user_geolocation"
+import { fakeCurrentWeatherData } from "../__mocks__/current-weather"
+import { currentUserGeolocation } from "../__mocks__/current-user-geolocation"
 import { Provider } from "react-redux"
 
 const mockStore = createMockStore([])

@@ -1,5 +1,5 @@
 /**
- * Weather API provided by
+ * Weather info API endpoints from
  * https://openweathermap.org/
  *
  * Sample endpoint:
